@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .location {
+            display: inline-block;
+            width:20%;
+            border:2px solid black;
+            text-align: center;
+            padding:20px;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <h6>Your Gold: <span>{{request.session.totalGold}}</span></h6>
+    {%for location in locations%}
+    <div class='location'>
+        <h2>{{location.name}}</h2>
+        <p>(earns {{location.min}}-{{location.max}} golds)</p>
+        <form action='/process/{{location.id}}'>
+            <button>Find Gold!</button>
+        </form>
+    </div>
+    {%endfor%}
+    <div>
+        <label>Activities:</label>
+        <div>
+            {%if activities%}
+            {%for color,activity in activities%}
+
+                <p style='color:{{color}}'>{{activity}}</p>
+                {%endfor%}
+            {%endif%}
+        </div>
+    </div>
+    <form action='/clear'>
+        <button>Clear History</button>
+    </form>
+</body>
+</html>
